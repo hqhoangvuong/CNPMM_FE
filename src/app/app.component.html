@@ -1,0 +1,16 @@
+<div id="app">
+  <!-- Toolbar -->
+  <mat-toolbar color="primary" class="app-header">
+    <span class="nav-tool-items">
+      <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
+      <a mat-button routerLink="home" routerLinkActive="active">Home</a>
+      <a mat-button routerLink="user" *ngIf="isLoggedIn">User</a>
+      <a mat-button routerLink="profile" routerLinkActive= "active">{{ username }}</a>
+      <a mat-button (click)="logout()" *ngIf="isLoggedIn">{{ username }}</a>
+    </span>
+  </mat-toolbar>
+
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</div>
