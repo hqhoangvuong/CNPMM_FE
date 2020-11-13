@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
+import { UserService } from './_services/user.service';
+import {SimpleUser} from './models/simple-user';
+import {PartialObserver} from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,15 +16,18 @@ export class AppComponent implements OnInit {
   showModeratorBoard = false;
   username: string;
 
-  constructor(private tokenStorageService: TokenStorageService) { }
+  constructor(private tokenStorageService: TokenStorageService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
 
     if (this.isLoggedIn) {
-      const user = this.tokenStorageService.getUser();
-
-      this.username = user.accessToken;
+      this.userService.getCurrentUserBasicInfo()
+        .subscribe((res) => {
+          const obj = JSON.parse(res);
+          this.username = obj.name;
+        });
     }
   }
 
