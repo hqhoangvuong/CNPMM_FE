@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Output} from '@angular/core';
 import { TokenStorageService } from './_services/token-storage.service';
 import { UserService } from './_services/user.service';
-import {SimpleUser} from './models/simple-user';
-import {PartialObserver} from 'rxjs';
+import { EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +14,9 @@ export class AppComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  avatarImage: any;
+  isImageLoading = false;
+  @Output() public sidenavToggle = new EventEmitter();
 
   constructor(private tokenStorageService: TokenStorageService,
               private userService: UserService) { }
@@ -28,7 +30,35 @@ export class AppComponent implements OnInit {
           const obj = JSON.parse(res);
           this.username = obj.name;
         });
+      this.getImageFromService();
     }
+  }
+
+  createImageFromBlob(image: Blob): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.avatarImage = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+  getImageFromService(): void {
+    this.isImageLoading = true;
+    this.userService.getCurrentUserAvatar().subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
+    console.log(typeof(this.avatarImage));
+  }
+
+  public onToggleSidenav = () => {
+    this.sidenavToggle.emit();
   }
 
   logout(): void {

@@ -15,6 +15,11 @@ export class UserService {
     return this.http.get(API_URL + 'current', { responseType: 'text' });
   }
 
+  getCurrentUserAvatar(): Observable<Blob> {
+    return this.http.get(API_URL + 'getavatar', { responseType: 'blob' });
+  }
+
+
   getCurrentUserDetails(): Observable<any> {
     return this.http.get(API_URL, { responseType: 'text' });
   }

@@ -9,3 +9,12 @@
   max-width: 100%;
   max-height: 1.3cm !important;
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  border-radius: 50%;
+}
