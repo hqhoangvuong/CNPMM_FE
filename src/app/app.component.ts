@@ -54,7 +54,6 @@ export class AppComponent implements OnInit {
       this.isImageLoading = false;
       console.log(error);
     });
-    console.log(typeof(this.avatarImage));
   }
 
   public onToggleSidenav = () => {

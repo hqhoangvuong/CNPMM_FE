@@ -1,24 +1,28 @@
-<mat-toolbar color="primary" class="app-header">
-  <mat-toolbar-row>
-    <button mat-icon-button>
-      <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
-    </button>
-    <div fxFlex="50%">
-      <a mat-button routerLink="login" *ngIf="!isLoggedIn" routerLinkActive="active">Log in</a>
-      <a mat-button routerLink="home" routerLinkActive="active">Dashboard</a>
-    </div>
-    <div fxFlex="50%" >
-      <img *ngIf="isLoggedIn && !isImageLoading" [src]='avatarImage' fxLayoutAlign="center center" width="50px" height="50px" class="rounded" alt="Cinque Terre">
-    </div>
-    <div fxFlex="0%">
-      <a mat-button *ngIf="isLoggedIn" routerLink="profile" routerLinkActive= "active"> Hi, {{ username }}</a>
-      <a mat-button (click)="logout()" *ngIf="isLoggedIn">Log out</a>
-    </div>
-  </mat-toolbar-row>
+<div id="app" class="navbar navbar-default navbar-fixed-top">
+  <mat-toolbar color="primary" class="app-header">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="onToggleSidenav()">menu</mat-icon>
+      </button>
+      <div fxFlex="50%">
+        <a mat-button routerLink="login" *ngIf="!isLoggedIn" routerLinkActive="active">Log in</a>
+        <a mat-button routerLink="home" *ngIf="isLoggedIn" routerLinkActive="active">Dashboard</a>
+        <a mat-button routerLink="timesheet" *ngIf="isLoggedIn" routerLinkActive="active">Timesheet</a>
+      </div>
+      <div fxFlex="50%" >
+        <img *ngIf="isLoggedIn && !isImageLoading" [src]='avatarImage' fxLayoutAlign="center center" width="50px" height="50px" class="rounded" alt="Cinque Terre">
+      </div>
+      <div fxFlex="0%">
+        <a mat-button *ngIf="isLoggedIn" routerLink="profile" routerLinkActive= "active"> Hi, {{ username }}</a>
+        <a mat-button (click)="logout()" *ngIf="isLoggedIn">Log out</a>
+      </div>
+    </mat-toolbar-row>
   </mat-toolbar>
+</div>
 
 <div class="container">
   <router-outlet></router-outlet>
+
 </div>
 
 

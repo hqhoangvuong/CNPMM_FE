@@ -15,13 +15,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { TimesheetEditComponent } from './timesheet/timesheet-edit/timesheet-edit.component';
+import { TimesheetHistoryComponent } from './timesheet/timesheet-history/timesheet-history.component';
+import { TimesheetComponent } from './timesheet/timesheet.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    ProfileComponent
+    ProfileComponent,
+    TimesheetEditComponent,
+    TimesheetHistoryComponent,
+    TimesheetComponent
   ],
   imports: [
     BrowserModule,

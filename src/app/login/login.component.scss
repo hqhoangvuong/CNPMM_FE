@@ -1,6 +1,7 @@
 .center {
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .space-top {
@@ -11,4 +12,14 @@
   .gutter {
     margin-left: 32px;
   }
+}
+
+.mat-content-custom{
+  padding: 40px;
+}
+
+.text-b1 {
+  display: block;
+  padding: 10px;
+  text-align: center;
 }

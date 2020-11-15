@@ -1,27 +1,29 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
-  <mat-card fxLayout="row" fxFlex="40%" class="center space-top" *ngIf="!isLoggedIn">
+  <mat-card fxLayout="row" fxFlex="40%" *ngIf="!isLoggedIn">
     <form class="example-form" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
-      <mat-card-header>
-        <mat-card-title>Log in</mat-card-title>
-      </mat-card-header>
-      <mat-card-content fxLayout.gt-sm="row" fxLayoutGap="50px">
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="30%">
-          <img mat-card-image src="assets/favicon.ico" alt="background image">
-        </div>
-        <div fxLayout.gt-sm="column" fxFlex.gt-sm="55%" class="gutter">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email" type="text" class="form-control" name="username" [(ngModel)]="form.email" required #email="ngModel" />
-          </mat-form-field>
+      <div class="mat-content-custom">
+        <mat-card-content fxLayout.gt-sm="row" fxLayoutGap="50px">
+          <div fxLayout.gt-sm="column" fxFlex.gt-sm="35%">
+            <div class="text-b1">
+              <div>
+                HRM Systems
+              </div>
+              <img mat-card-image src="assets/favicon.ico" alt="background image">
+            </div>
+          </div>
+          <div fxLayout.gt-sm="column" fxFlex.gt-sm="55%" class="gutter center">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Email" type="text" class="form-control" name="username" [(ngModel)]="form.email" required #email="ngModel" />
+            </mat-form-field>
 
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password"
-                  required minlength="6" #password="ngModel" />
-        </mat-form-field>
-          <button mat-stroked-button color="accent" class="btn btn-block">Log in</button>
-        </div>
-      </mat-card-content>
-
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password"
+                     required minlength="6" #password="ngModel" />
+            </mat-form-field>
+            <button mat-stroked-button color="accent" class="btn btn-block">Log in</button>
+          </div>
+        </mat-card-content>
+      </div>
     </form>
   </mat-card>
-
 </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStorageService } from '../_services/token-storage.service';
+import { UserService } from '../_services/user.service';
+
 
 @Component({
   selector: 'app-profile',
@@ -9,10 +11,39 @@ import { TokenStorageService } from '../_services/token-storage.service';
 export class ProfileComponent implements OnInit {
 
   currentUser: any;
+  avatarImage: any;
+  isImageLoading = false;
 
-  constructor(private token: TokenStorageService) { }
+  constructor(private token: TokenStorageService,
+              private userService: UserService) { }
 
   ngOnInit(): void {
-    this.currentUser = this.token.getUser();
+    this.userService.getCurrentUserDetails().subscribe(userDetail => {
+        this.currentUser = userDetail;
+        console.log(userDetail);
+    });
+    this.getImageFromService();
+  }
+
+  createImageFromBlob(image: Blob): void {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => {
+      this.avatarImage = reader.result;
+    }, false);
+
+    if (image) {
+      reader.readAsDataURL(image);
+    }
+  }
+
+  getImageFromService(): void {
+    this.isImageLoading = true;
+    this.userService.getCurrentUserAvatar().subscribe(data => {
+      this.createImageFromBlob(data);
+      this.isImageLoading = false;
+    }, error => {
+      this.isImageLoading = false;
+      console.log(error);
+    });
   }
 }

@@ -1,21 +1,21 @@
-<mat-sidenav-container>
-  <mat-sidenav #sidenav>
-    <mat-nav-list>
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <div class="profile-content">
+    <mat-card class="nav-card">
+      <mat-card-content>
+        <div class="parent">
+          <div flex-auto>
+            <img *ngIf="!isImageLoading" [src]='avatarImage' width="200px" height="200px" alt="Cinque Terre">
+          </div>
+          <div flex-auto class="nav-basic-info">
+            <h2>{{ currentUser[0].name }}</h2>
+            <p>ID. {{ currentUser[0].employeeCode }}</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
 
-      <a mat-list-item [routerLink]="'/accounts'"> Accounts </a>
-      <a mat-list-item [routerLink]="'/create-account'"> Create Account </a>
-      <a mat-list-item [routerLink]="'/contacts'"> Contacts </a>
-      <a mat-list-item [routerLink]="'/create-contact'"> Create Contact </a>
-      <a mat-list-item [routerLink]="'/activities'"> Activities </a>
-      <a mat-list-item [routerLink]="'/create-activity'"> Create Activity </a>
-      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>
-
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <div style="height: 88vh;">
-
-      <router-outlet></router-outlet>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<ng-template #loggedOut>
+  Please login.
+</ng-template>
