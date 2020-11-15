@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   currentUser: any;
   avatarImage: any;
   isImageLoading = false;
+  currentJobTitle = '';
 
   constructor(private token: TokenStorageService,
               private userService: UserService) { }
@@ -20,8 +21,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getCurrentUserDetails().subscribe(userDetail => {
         this.currentUser = userDetail;
+        userDetail[0].jobs.forEach((element) => {
+          if (element.isActive === true) {
+            this.currentJobTitle = element.jobTitle;
+          }
+        });
         console.log(userDetail);
     });
+
     this.getImageFromService();
   }
 

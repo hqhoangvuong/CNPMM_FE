@@ -4,13 +4,33 @@
       <mat-card-content>
         <div class="parent">
           <div flex-auto>
-            <img *ngIf="!isImageLoading" [src]='avatarImage' width="200px" height="200px" alt="Cinque Terre">
+            <img *ngIf="!isImageLoading" [src]='avatarImage' width="150px" height="150px" alt="Cinque Terre">
           </div>
           <div flex-auto class="nav-basic-info">
             <h2>{{ currentUser[0].name }}</h2>
             <p>ID. {{ currentUser[0].employeeCode }}</p>
+            <p>{{ currentJobTitle }}</p>
           </div>
         </div>
+        <div class="section-header">
+          <div class="text"> Personal </div>
+          <mat-divider [inset]="true"></mat-divider>
+        </div>
+        <div class="menu-item">
+          <a mat-button class="menu-item"> Personal Details </a>
+        </div>
+
+        <div class="section-header">
+          <div class="text"> Employment </div>
+          <mat-divider [inset]="true"></mat-divider>
+        </div>
+        <div class="menu-item">
+          <a mat-button> Jobs </a>
+        </div>
+        <div class="menu-item">
+          <a mat-button> Project info </a>
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>
