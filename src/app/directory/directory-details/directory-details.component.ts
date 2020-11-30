@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { DirectoryService } from '../../_services/directory.service';
 
 export interface PeriodicElement {
-  name: string;
-  IDmember: number;
-  weight: number;
+  fullName: string;
+  employeeId: string;
+  jobTitle: string;
 
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {IDmember: 1, name: 'Hydrogen', weight: 1.0079},
+  { fullName: 'Bùi Thị Hồng Nhung', employeeId: '1', jobTitle: 'internship'},
 
 
 ];
@@ -20,7 +20,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class DirectoryDetailsComponent implements OnInit {
   directories: any;
-  displayedColumns: string[] = ['idmember', 'name', 'weight'];
+  displayedColumns: string[] = ['employeeId', 'fullName', 'jobTitle'];
   dataSource = ELEMENT_DATA;
   constructor(private directoryService: DirectoryService) { }
 
