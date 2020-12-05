@@ -1,6 +1,9 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 .directory-img{
   width: 120px;
   height: 120px;
+  padding: 5px;
 }
 table {
   width: 100%;
@@ -14,10 +17,35 @@ table {
   padding-left: 20px;
 }
 .example-form {
+  margin-bottom: -1.25em;
   min-width: 150px;
   max-width: 500px;
   width: 100%;
 }
 .example-full-width {
   width: 100%;
+}
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 5px;
+}
+
+.directory-card {
+  padding: 20px;
+  margin: 10px;
+  width: 95%;
+  height: 100%;
+}
+
+.employee-image {
+  padding: 10px;
+}
+
+.info-group {
+
 }
