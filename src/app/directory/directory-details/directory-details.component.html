@@ -1,0 +1,60 @@
+<div class="basic-container">
+  <mat-grid-list cols="1" rowHeight="fit" gutterSize="10px" [style.height]="'1000px'">
+    <mat-grid-tile *ngFor="let i of [1,2,3]">
+      <mat-card class="directory-card">
+        <div fxLayout="row">
+          <div fxFlex="10" class="employee-image">
+            <img src="https://images.unsplash.com/photo-1456796148441-485386946471?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;s=7fb56550a679b93a7cf00b0678d1ad8"
+                 alt="Smiley face" width="100%">
+          </div>
+
+          <div fxFlex fxFlexAlign="center" class="info-group">
+            <div fxLayout="row">
+              <h2>Vu Quoc Lam</h2>
+            </div>
+            <div fxLayout="row">
+              <p> Vũ Quốc Lâm </p>
+            </div>
+            <div fxLayout="row">
+              <h2>Chief Executive Officer</h2>
+            </div>
+            <div fxLayout="row">
+              <h2> ID.0001 </h2>
+            </div>
+          </div>
+
+          <div fxFlex fxFlexAlign="center" class="info-group">
+            <div fxLayout="row">
+              This is cat {{i}}
+            </div>
+            <div fxLayout="row">
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star_half</mat-icon>
+            </div>
+          </div>
+
+          <div fxFlex fxFlexAlign="center" class="info-group">
+            <div fxLayout="row">
+              This is cat {{i}}
+            </div>
+            <div fxLayout="row">
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star</mat-icon>
+              <mat-icon [style.color]="'orange'">star_half</mat-icon>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
+
+<!--
+Copyright Google LLC All Rights Reserved.
+
+Use of this source code is governed by an MIT-style license that can be
+found in the LICENSE file at https://angular.io/license
+-->
