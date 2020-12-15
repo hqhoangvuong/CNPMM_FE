@@ -11,7 +11,7 @@
   padding: 20px;
 }
 .parent{
-  max-width: 500px;
+  max-width: 100%;
   display: flex;
 }
 
@@ -53,4 +53,11 @@
 .text {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.details-content {
+  padding-top: 20px;
+  width: 80%;
+  height: 90%;
+  box-sizing: border-box;
 }

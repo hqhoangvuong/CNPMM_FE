@@ -17,6 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DirectoryComponent } from './directory/directory.component';
 import { DirectoryDetailsComponent } from './directory/directory-details/directory-details.component';
+import { DetailsComponent } from './profile/details/details.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { DirectoryDetailsComponent } from './directory/directory-details/directo
     HomeComponent,
     ProfileComponent,
     DirectoryComponent,
-    DirectoryDetailsComponent
+    DirectoryDetailsComponent,
+    DetailsComponent
   ],
   imports: [
     BrowserModule,
