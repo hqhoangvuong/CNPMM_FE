@@ -1,1 +1,10 @@
-<p>home works!</p>
+<div class="container" *ngIf="currentUser; else loggedOut">
+  <div class="parent">
+  </div>
+</div>
+<p></p>
+<app-weekly-report [startDay]="weekStart" [endDay]="weekEnd"></app-weekly-report>
+
+<ng-template #loggedOut>
+  Please login.
+</ng-template>

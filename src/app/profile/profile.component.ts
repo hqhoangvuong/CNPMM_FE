@@ -14,6 +14,9 @@ export class ProfileComponent implements OnInit {
   avatarImage: any;
   isImageLoading = false;
   currentJobTitle = '';
+  isDetailSelected = true;
+  isJobSelected = false;
+  isPjInfoSelected = false;
 
   constructor(private token: TokenStorageService,
               private userService: UserService) { }
@@ -26,7 +29,6 @@ export class ProfileComponent implements OnInit {
             this.currentJobTitle = element.jobTitle;
           }
         });
-        console.log(userDetail);
     });
 
     this.getImageFromService();
@@ -52,5 +54,23 @@ export class ProfileComponent implements OnInit {
       this.isImageLoading = false;
       console.log(error);
     });
+  }
+
+  selectDetail(): void {
+    this.isDetailSelected = true;
+    this.isJobSelected = false;
+    this.isPjInfoSelected = false;
+  }
+
+  selectJob(): void {
+    this.isDetailSelected = false;
+    this.isJobSelected = true;
+    this.isPjInfoSelected = false;
+  }
+
+  selectPjInfo(): void {
+    this.isDetailSelected = false;
+    this.isJobSelected = false;
+    this.isPjInfoSelected = true;
   }
 }

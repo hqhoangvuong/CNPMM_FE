@@ -5,7 +5,7 @@
         <mat-card-content>
           <div class="parent">
             <div flex-auto>
-              <img *ngIf="!isImageLoading" [src]='avatarImage' width="150px" height="150px" alt="Cinque Terre">
+              <img *ngIf="!isImageLoading" [src]='avatarImage' width="150px" height="150px" alt="avatarImage">
             </div>
             <div flex-auto class="nav-basic-info">
               <h2>{{ currentUser[0].name }}</h2>
@@ -18,7 +18,7 @@
             <mat-divider [inset]="true"></mat-divider>
           </div>
           <div class="menu-item">
-            <a mat-button class="menu-item"> Personal Details </a>
+            <a mat-button class="menu-item" (click)="selectDetail()"> Personal Details </a>
           </div>
 
           <div class="section-header">
@@ -26,17 +26,19 @@
             <mat-divider [inset]="true"></mat-divider>
           </div>
           <div class="menu-item">
-            <a mat-button> Jobs </a>
+            <a mat-button (click)="selectJob()"> Jobs </a>
           </div>
           <div class="menu-item">
-            <a mat-button> Project info </a>
+            <a mat-button (click)="selectPjInfo()"> Project info </a>
           </div>
 
         </mat-card-content>
       </mat-card>
     </div>
     <div class="details-content">
-      <app-details [UserBasicInfo]="currentUser[0]"></app-details>
+      <app-details *ngIf="isDetailSelected" [UserBasicInfo]="currentUser[0]"></app-details>
+      <app-job *ngIf="isJobSelected" [Jobs]="currentUser[0].jobs" [EmployeeCode]="currentUser[0].employeeCode"></app-job>
+      <app-project-info *ngIf="isPjInfoSelected" [Projects]="currentUser[0].projects"></app-project-info>
     </div>
   </div>
 </div>

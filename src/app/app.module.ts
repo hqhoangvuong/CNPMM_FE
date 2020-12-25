@@ -18,6 +18,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { DirectoryComponent } from './directory/directory.component';
 import { DirectoryDetailsComponent } from './directory/directory-details/directory-details.component';
 import { DetailsComponent } from './profile/details/details.component';
+import { JobComponent } from './profile/job.component';
+import { ProjectInfoComponent } from './profile/project-info.component';
+import { DatePipe } from '@angular/common';
+import { TimesheetComponent } from './timesheet/timesheet.component';
+import { WeeklyReportComponent } from './timesheet/weekly-report.component';
+import { DailyReportComponent } from './timesheet/daily-report.component';
+import { TimesheetTaskComponent } from './timesheet/timesheet-task.component';
+import { TimesheetWeeklyHeaderComponent } from './timesheet/timesheet-weekly-header.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +36,14 @@ import { DetailsComponent } from './profile/details/details.component';
     ProfileComponent,
     DirectoryComponent,
     DirectoryDetailsComponent,
-    DetailsComponent
+    DetailsComponent,
+    JobComponent,
+    ProjectInfoComponent,
+    TimesheetComponent,
+    WeeklyReportComponent,
+    DailyReportComponent,
+    TimesheetTaskComponent,
+    TimesheetWeeklyHeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -38,10 +54,11 @@ import { DetailsComponent } from './profile/details/details.component';
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MatSidenavModule
+    MatSidenavModule,
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    DatePipe
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
