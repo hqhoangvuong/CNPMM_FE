@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TimesheetTask} from '../models/timesheet-task';
+import {AccountDomainService} from '../_services/account-domain.service';
 
 @Component({
   selector: 'app-timesheet-task',
@@ -8,11 +9,15 @@ import {TimesheetTask} from '../models/timesheet-task';
 })
 export class TimesheetTaskComponent implements OnInit {
 
-  constructor() { }
+  constructor(private accountService: AccountDomainService) { }
   @Input() TaskModel: TimesheetTask;
   @Output() TaskModelChange = new EventEmitter<TimesheetTask>();
-
+  @Output() ButtonClicked = new EventEmitter<[string, number]>();
+  ProjectList: any;
+  TaskList: any;
   ngOnInit(): void {
+    this.accountService.getAllProject().subscribe(x => this.ProjectList = x);
+    console.log(typeof(this.ProjectList));
   }
 
   numberOnly(event): boolean {
@@ -23,4 +28,19 @@ export class TimesheetTaskComponent implements OnInit {
   onBlurMethod(): void {
     this.TaskModelChange.emit(this.TaskModel);
   }
+
+  handleClick(which: string): void {
+    if (this.TaskModel.Id === 0 && which.includes('delete')) {
+      return;
+    }
+    this.ButtonClicked.emit([which, this.TaskModel.Id]);
+  }
+
+  selectedPj(pjId: string): void {
+    this.accountService.getAllTask(pjId).subscribe(x => {
+      this.TaskList = x;
+      console.log(x, pjId);
+    });
+  }
+
 }

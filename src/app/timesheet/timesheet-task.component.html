@@ -1,63 +1,79 @@
-<div class="padding-top-10px" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
+<div class="container-padding-top-10px-alight-center" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
   <div fxFlex="15%">
-    <mat-form-field class="full-width-field">
-      <input  matInput type="text" [(ngModel)]="TaskModel.Client" value="SAM Miracle" (blur)="onBlurMethod()">
+    <mat-form-field class="full-width-field" appearance= "outline" floatLabel='never'>
+      <input matInput type="text" [(ngModel)]="TaskModel.Client" (blur)="onBlurMethod()" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPj($event.option.id)">
+        <mat-option *ngFor="let option of ProjectList" [id]="option.id"  [value]="option.name">
+          {{ option.name }}
+        </mat-option>
+      </mat-autocomplete>
     </mat-form-field>
   </div>
-
   <div fxFlex="15%">
-    <mat-form-field class="full-width-field">
-      <input matInput  type="text" [(ngModel)]="TaskModel.Activity" value="Develop new feature" (blur)="onBlurMethod()">
+    <mat-form-field class="full-width-field" appearance="outline">
+      <mat-select>
+        <mat-option *ngFor="let option of TaskList" [value]="option.id">{{ option.activityDescription }}</mat-option>
+      </mat-select>
     </mat-form-field>
   </div>
-  <div fxFlex="35%">
-    <mat-form-field class="full-width-field">
+  <div fxFlex="32%">
+    <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
       <input matInput  type="text" [(ngModel)]="TaskModel.Task" value="Task" (blur)="onBlurMethod()">
     </mat-form-field>
   </div>
-  <div fxFlex="30%">
+  <div fxFlex="35%">
     <div fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="15px" ngClass.gt-xs="ml-10" (blur)="onBlurMethod()">
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.MonHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.TueHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.WedHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.ThuHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.FriHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.SatHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
-        <mat-form-field class="full-width-field">
+        <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
           <input matInput (keypress)="numberOnly($event)" [(ngModel)]="TaskModel.SunHr" maxlength="2"
                  type="text" (blur)="onBlurMethod()">
         </mat-form-field>
+      </div>
+      <div fxFlex="5%">
+        <button mat-icon-button aria-label="Delete this task" (click)="handleClick('delete')" class="center">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div fxFlex="5%">
+        <button mat-icon-button aria-label="Clone this task" (click)="handleClick('copy')" class="center">
+          <mat-icon>file_copy</mat-icon>
+        </button>
       </div>
     </div>
   </div>

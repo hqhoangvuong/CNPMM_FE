@@ -22,10 +22,10 @@ import { JobComponent } from './profile/job.component';
 import { ProjectInfoComponent } from './profile/project-info.component';
 import { DatePipe } from '@angular/common';
 import { TimesheetComponent } from './timesheet/timesheet.component';
-import { WeeklyReportComponent } from './timesheet/weekly-report.component';
-import { DailyReportComponent } from './timesheet/daily-report.component';
+import { WeeklyReportComponent } from './timesheet/weekly-report.component'
 import { TimesheetTaskComponent } from './timesheet/timesheet-task.component';
 import { TimesheetWeeklyHeaderComponent } from './timesheet/timesheet-weekly-header.component';
+import { TimesheetFooterComponent } from './timesheet/timesheet-footer.component';
 
 
 @NgModule({
@@ -41,9 +41,9 @@ import { TimesheetWeeklyHeaderComponent } from './timesheet/timesheet-weekly-hea
     ProjectInfoComponent,
     TimesheetComponent,
     WeeklyReportComponent,
-    DailyReportComponent,
     TimesheetTaskComponent,
-    TimesheetWeeklyHeaderComponent
+    TimesheetWeeklyHeaderComponent,
+    TimesheetFooterComponent
   ],
   imports: [
     BrowserModule,
