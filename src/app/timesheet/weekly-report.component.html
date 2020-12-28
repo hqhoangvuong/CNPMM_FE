@@ -1,0 +1,23 @@
+<div class="container">
+  <mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          This week ({{startDay}} - {{endDay}})
+        </mat-panel-title>
+        <mat-panel-description>
+          Total Hours: {{TimesheetHr.TotalHrs}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-timesheet-weekly-header [weekStart]="startDayRaw"></app-timesheet-weekly-header>
+      <app-timesheet-task *ngFor="let task of ListTask" [TaskModel]="task" (change)="onTaskBlur()" (ButtonClicked)="handleTaskAction($event)"></app-timesheet-task>
+      <app-timesheet-footer [TimesheetHr]="TimesheetHr"></app-timesheet-footer>
+      <div class="padding-top-20px">
+        <button mat-stroked-button (click)="addTask()">+ New task</button>
+        <button mat-stroked-button (click)="saveTask()">Save</button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
