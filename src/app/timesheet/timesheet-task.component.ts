@@ -16,8 +16,15 @@ export class TimesheetTaskComponent implements OnInit {
   ProjectList: any;
   TaskList: any;
   ngOnInit(): void {
-    this.accountService.getAllProject().subscribe(x => this.ProjectList = x);
-    console.log(typeof(this.ProjectList));
+    this.accountService.getAllProject().subscribe(x => {
+      this.ProjectList = x;
+      if (this.TaskModel.Activity && this.TaskModel.Client){
+        const currentSelectedPj = this.ProjectList.find(element => element.name === this.TaskModel.Client);
+        this.selectedPj(currentSelectedPj.id);
+      }
+    });
+
+    console.log(this.TaskModel);
   }
 
   numberOnly(event): boolean {

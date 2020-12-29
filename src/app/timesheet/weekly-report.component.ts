@@ -50,7 +50,12 @@ export class WeeklyReportComponent implements OnInit {
       if (this.ListTask.length === 0) {
         return;
       }
-      this.ListTask.splice(action[1], 1);
+
+      this.ListTask.forEach((value, index) => {
+        if (value.Id === action[1]) { this.ListTask.splice(index, 1); }
+      });
+
+      console.log(action[1], this.ListTask);
     }
 
     if (action.includes('copy')) {
@@ -60,5 +65,14 @@ export class WeeklyReportComponent implements OnInit {
       console.log(copiedTask);
     }
     this.onTaskBlur();
+  }
+
+  handleTaskActionButtonClicked(typeOfButton: string): void {
+    switch (typeOfButton){
+      case 'add-new-task': {
+        this.addTask();
+        break;
+      }
+    }
   }
 }

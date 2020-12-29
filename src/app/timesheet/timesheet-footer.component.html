@@ -1,6 +1,14 @@
 <div class="container-padding-top-10px-alight-center" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
   <div fxFlex="15%">
-
+    <button mat-stroked-button (click)="buttonClicked('add-new-task')">+ New task</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Current Project</button>
+      <button mat-menu-item>Copy from previous week</button>
+      <button mat-menu-item>Holiday</button>
+    </mat-menu>
   </div>
 
   <div fxFlex="15%">

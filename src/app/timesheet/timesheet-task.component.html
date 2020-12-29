@@ -11,8 +11,10 @@
   </div>
   <div fxFlex="15%">
     <mat-form-field class="full-width-field" appearance="outline">
-      <mat-select>
-        <mat-option *ngFor="let option of TaskList" [value]="option.id">{{ option.activityDescription }}</mat-option>
+      <mat-select  [(ngModel)]="TaskModel.Activity">
+        <mat-option *ngFor="let option of TaskList" [value]="option.id">
+          {{ option.activityDescription }}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
