@@ -1,6 +1,8 @@
 export class SimpleUser {
-  email: string;
-  firstName: string;
-  lastName: Date;
-  name: string;
+  Id: string;
+  EmployeeCode: string;
+  Name: string;
+  Email: string;
+  Resource: string;
+  JobTitle: string;
 }

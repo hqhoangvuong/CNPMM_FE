@@ -26,6 +26,10 @@ import { WeeklyReportComponent } from './timesheet/weekly-report.component'
 import { TimesheetTaskComponent } from './timesheet/timesheet-task.component';
 import { TimesheetWeeklyHeaderComponent } from './timesheet/timesheet-weekly-header.component';
 import { TimesheetFooterComponent } from './timesheet/timesheet-footer.component';
+import { AccountDomainManagerComponent } from './account-domain-manager/account-domain-manager.component';
+import { HrManagementComponent } from './account-domain-manager/hr-management/hr-management.component';
+import { TimesheetManagementComponent } from './account-domain-manager/timesheet-management/timesheet-management.component';
+import { ActivityManagementComponent } from './account-domain-manager/activity-management/activity-management.component';
 
 
 @NgModule({
@@ -43,7 +47,11 @@ import { TimesheetFooterComponent } from './timesheet/timesheet-footer.component
     WeeklyReportComponent,
     TimesheetTaskComponent,
     TimesheetWeeklyHeaderComponent,
-    TimesheetFooterComponent
+    TimesheetFooterComponent,
+    AccountDomainManagerComponent,
+    HrManagementComponent,
+    TimesheetManagementComponent,
+    ActivityManagementComponent
   ],
   imports: [
     BrowserModule,

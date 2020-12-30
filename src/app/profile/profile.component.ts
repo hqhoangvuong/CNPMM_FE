@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { UserService } from '../_services/user.service';
 })
 export class ProfileComponent implements OnInit {
 
-  currentUser: any;
+  @Input() currentUser: User;
+  @Input() isCallFromAnother: boolean;
   avatarImage: any;
   isImageLoading = false;
   currentJobTitle = '';
@@ -19,18 +21,21 @@ export class ProfileComponent implements OnInit {
   isPjInfoSelected = false;
 
   constructor(private token: TokenStorageService,
-              private userService: UserService) { }
+              private userService: UserService) {
+    this.isCallFromAnother = false;
+  }
 
   ngOnInit(): void {
-    this.userService.getCurrentUserDetails().subscribe(userDetail => {
-        this.currentUser = userDetail;
+    if (!this.isCallFromAnother) {
+      this.userService.getCurrentUserDetails().subscribe(userDetail => {
+        this.currentUser = userDetail[0];
         userDetail[0].jobs.forEach((element) => {
           if (element.isActive === true) {
             this.currentJobTitle = element.jobTitle;
           }
         });
-    });
-
+      });
+    }
     this.getImageFromService();
   }
 

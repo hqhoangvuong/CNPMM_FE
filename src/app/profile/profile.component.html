@@ -1,4 +1,4 @@
-<div class="container" *ngIf="currentUser; else loggedOut">
+<div [ngClass]="{ 'container': !isCallFromAnother }">
   <div class="parent">
     <div class="profile-content">
       <mat-card class="nav-card">
@@ -8,8 +8,8 @@
               <img *ngIf="!isImageLoading" [src]='avatarImage' width="150px" height="150px" alt="avatarImage">
             </div>
             <div flex-auto class="nav-basic-info">
-              <h2>{{ currentUser[0].name }}</h2>
-              <p>ID. {{ currentUser[0].employeeCode }}</p>
+              <h2>{{ currentUser.name }}</h2>
+              <p>ID. {{ currentUser.employeeCode }}</p>
               <p>{{ currentJobTitle }}</p>
             </div>
           </div>
@@ -36,13 +36,9 @@
       </mat-card>
     </div>
     <div class="details-content">
-      <app-details *ngIf="isDetailSelected" [UserBasicInfo]="currentUser[0]"></app-details>
-      <app-job *ngIf="isJobSelected" [Jobs]="currentUser[0].jobs" [EmployeeCode]="currentUser[0].employeeCode"></app-job>
-      <app-project-info *ngIf="isPjInfoSelected" [Projects]="currentUser[0].projects"></app-project-info>
+      <app-details *ngIf="isDetailSelected" [UserBasicInfo]="currentUser"></app-details>
+      <app-job *ngIf="isJobSelected" [Jobs]="currentUser.jobs" [EmployeeCode]="currentUser.employeeCode"></app-job>
+      <app-project-info *ngIf="isPjInfoSelected" [Projects]="currentUser.projects"></app-project-info>
     </div>
   </div>
 </div>
-
-<ng-template #loggedOut>
-  Please login.
-</ng-template>

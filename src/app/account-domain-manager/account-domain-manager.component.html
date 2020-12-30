@@ -1,0 +1,23 @@
+<div class="container">
+  <mat-drawer-container class="container-sidenav">
+    <mat-drawer mode="side" class="sidenav" opened>
+      <button mat-button color="primary" class="padding-10px" (click)="changeCategory(0)">
+        <mat-icon>work</mat-icon> Timesheet Management
+      </button>
+      <button mat-button color="primary" class="padding-10px" (click)="changeCategory(1)">
+        <mat-icon>person</mat-icon> HR Management
+      </button>
+      <button mat-button color="primary" class="padding-10px" (click)="changeCategory(2)">
+        <mat-icon>done_outline</mat-icon> Activity Management
+      </button>
+    </mat-drawer>
+    <mat-drawer-content>
+      <app-hr-management *ngIf="isHrManSelected"></app-hr-management>
+      <app-timesheet-management *ngIf="isTimesheetManSelected"></app-timesheet-management>
+      <app-activity-management *ngIf="isActivityManSelected"></app-activity-management>
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+
+
+

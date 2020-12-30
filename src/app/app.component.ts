@@ -11,6 +11,7 @@ import { EventEmitter } from '@angular/core';
 export class AppComponent implements OnInit {
   private roles: string[];
   isLoggedIn = false;
+  isAccountDomainLeader = false;
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
@@ -29,6 +30,7 @@ export class AppComponent implements OnInit {
         .subscribe((res) => {
           const obj = JSON.parse(res);
           this.username = obj.name;
+          this.isAccountDomainLeader = obj.isTeamLead;
         });
       this.getImageFromService();
     }

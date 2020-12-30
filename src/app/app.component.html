@@ -8,6 +8,8 @@
         <a mat-button routerLink="login" *ngIf="!isLoggedIn" routerLinkActive="active">Log in</a>
         <a mat-button routerLink="home" *ngIf="isLoggedIn" routerLinkActive="active">Dashboard</a>
         <a mat-button routerLink="timesheet" *ngIf="isLoggedIn" routerLinkActive="active">Timesheet</a>
+        <a mat-button routerLink="account-domain-management" *ngIf="isLoggedIn && isAccountDomainLeader"
+           routerLinkActive="active"> Account Domain Management </a>
       </div>
       <div fxFlex="50%" >
         <img *ngIf="isLoggedIn && !isImageLoading" [src]='avatarImage' fxLayoutAlign="center center" width="50px" height="50px" class="rounded" alt="Cinque Terre">

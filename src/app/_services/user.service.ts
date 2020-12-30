@@ -27,4 +27,16 @@ export class UserService {
     return this.http.get(API_URL + 'mod', { responseType: 'text' });
   }
 
+  getAllUserOfAccountDomain(accDomainId: string): Observable<any> {
+    return this.http.get(API_URL + 'getuserbyaccountdomain?accDomainId=' + accDomainId, { responseType: 'json' });
+  }
+
+  getCurrentUserAccountDomain(): Observable<any> {
+    return this.http.get(API_URL + 'getcurrentuseraccountdomain', { responseType: 'json' });
+  }
+
+  getUserById(userId: string): Observable<any> {
+    return this.http.get(API_URL + 'getuser?userId=' + userId,  { responseType: 'json' });
+  }
+
 }
