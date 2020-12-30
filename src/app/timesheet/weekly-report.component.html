@@ -19,8 +19,11 @@
       <app-timesheet-footer [TimesheetHr]="TimesheetHr"
                             (FooterButtonClicked)="handleTaskActionButtonClicked($event)">
       </app-timesheet-footer>
-      <div class="padding-top-20px">
 
+      <div class="submit-control-button">
+        <button mat-raised-button (click)="onSave()"> Save </button>
+        &nbsp;&nbsp;
+        <button mat-raised-button> Submit </button>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

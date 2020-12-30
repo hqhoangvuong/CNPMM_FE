@@ -3,6 +3,9 @@ import { DatePipe } from '@angular/common';
 import { TimesheetTask } from '../models/timesheet-task';
 import { TimeSheetHour } from '../models/timesheet-hour';
 import { AccountDomainService } from '../_services/account-domain.service';
+import {Timesheet} from '../models/timesheet';
+import {UserService} from '../_services/user.service';
+import {TimesheetService} from '../_services/timesheet.service';
 
 @Component({
   selector: 'app-weekly-report',
@@ -12,14 +15,18 @@ import { AccountDomainService } from '../_services/account-domain.service';
 export class WeeklyReportComponent implements OnInit {
   panelOpenState = false;
   startDayRaw: any;
+  endDayRaw: any;
   @Input() startDay: any;
   @Input() endDay: any;
   ListTask: Array<TimesheetTask> = [];
   TimesheetHr: TimeSheetHour = new TimeSheetHour();
-  constructor(public datepipe: DatePipe) { }
+  constructor(public datepipe: DatePipe,
+              private userService: UserService,
+              private timesheetService: TimesheetService) { }
 
   ngOnInit(): void {
     this.startDayRaw = this.startDay;
+    this.endDayRaw = this.endDay;
     this.startDay = this.datepipe.transform(this.startDay, 'MMMM dd');
     this.endDay = this.datepipe.transform(this.endDay, 'MMMM dd');
     this.addTask();
@@ -74,5 +81,18 @@ export class WeeklyReportComponent implements OnInit {
         break;
       }
     }
+  }
+
+  onSave(): void {
+    this.userService.getCurrentUserDetails().subscribe(x => {
+      const timesheet: Timesheet = new Timesheet();
+      timesheet.UserId = x[0].id;
+      timesheet.StartDate = this.startDayRaw;
+      timesheet.EndDate = this.endDayRaw;
+      timesheet.TotalHour = 30;
+      timesheet.Status = 30;
+      console.log(timesheet);
+      this.timesheetService.addTimeSheet(timesheet);
+    });
   }
 }

@@ -18,6 +18,13 @@ export class AuthInterceptor implements HttpInterceptor {
       // console.log(token);
       authReq = req.clone({ headers: req.headers.set(TOKEN_HEADER_KEY, 'Bearer ' + token) });
     }
+
+    if (req.responseType === 'blob') {
+      // authReq = req.clone({
+      //   setHeaders: { 'Content-Type': 'application/octet-stream' }
+      // });
+    }
+
     return next.handle(authReq);
   }
 }
