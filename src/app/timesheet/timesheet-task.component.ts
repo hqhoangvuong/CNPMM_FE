@@ -18,13 +18,15 @@ export class TimesheetTaskComponent implements OnInit {
   ngOnInit(): void {
     this.accountService.getAllProject().subscribe(x => {
       this.ProjectList = x;
-      if (this.TaskModel.Activity && this.TaskModel.Client){
-        const currentSelectedPj = this.ProjectList.find(element => element.name === this.TaskModel.Client);
+      if (this.TaskModel.Activity && this.TaskModel.AccountDomainName){
+        const currentSelectedPj = this.ProjectList.find(element => element.name === this.TaskModel.AccountDomainName);
         this.selectedPj(currentSelectedPj.id);
       }
     });
 
-    console.log(this.TaskModel);
+    if (this.TaskModel.AccountDomainName && this.TaskModel.ActivityId) {
+      this.selectedPj(this.TaskModel.AccountDomainId);
+    }
   }
 
   numberOnly(event): boolean {
@@ -44,9 +46,9 @@ export class TimesheetTaskComponent implements OnInit {
   }
 
   selectedPj(pjId: string): void {
+    this.TaskModel.AccountDomainId = pjId;
     this.accountService.getAllTask(pjId).subscribe(x => {
       this.TaskList = x;
-      console.log(x, pjId);
     });
   }
 

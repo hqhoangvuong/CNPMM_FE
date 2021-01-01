@@ -3,8 +3,9 @@
   </div>
 </div>
 <p></p>
-<app-weekly-report [startDay]="weekStart" [endDay]="weekEnd"></app-weekly-report>
-
+<div *ngIf="isRender">
+  <app-weekly-report [Timesheet]="ExistedTimesheet"></app-weekly-report>
+</div>
 <ng-template #loggedOut>
   Please login.
 </ng-template>

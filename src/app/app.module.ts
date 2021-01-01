@@ -30,6 +30,8 @@ import { AccountDomainManagerComponent } from './account-domain-manager/account-
 import { HrManagementComponent } from './account-domain-manager/hr-management/hr-management.component';
 import { TimesheetManagementComponent } from './account-domain-manager/timesheet-management/timesheet-management.component';
 import { ActivityManagementComponent } from './account-domain-manager/activity-management/activity-management.component';
+import { AddNewPersonDialogComponent } from './account-domain-manager/hr-management/add-new-person-dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 
 @NgModule({
@@ -51,18 +53,20 @@ import { ActivityManagementComponent } from './account-domain-manager/activity-m
     AccountDomainManagerComponent,
     HrManagementComponent,
     TimesheetManagementComponent,
-    ActivityManagementComponent
+    ActivityManagementComponent,
+    AddNewPersonDialogComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
     AppRoutingModule,
-    [ FormsModule, ReactiveFormsModule ],
+    [FormsModule, ReactiveFormsModule],
     HttpClientModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
     MatSidenavModule,
+    MatDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

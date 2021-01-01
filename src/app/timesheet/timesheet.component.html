@@ -1,1 +1,5 @@
-<p>timesheet works!</p>
+<div class="container">
+  <app-weekly-report *ngFor="let timesheet of Timesheet"
+                     [Timesheet]="timesheet" >
+  </app-weekly-report>
+</div>

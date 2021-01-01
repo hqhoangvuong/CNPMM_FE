@@ -1,7 +1,7 @@
 <div class="container-padding-top-10px-alight-center" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
   <div fxFlex="15%">
     <mat-form-field class="full-width-field" appearance= "outline" floatLabel='never'>
-      <input matInput type="text" [(ngModel)]="TaskModel.Client" (blur)="onBlurMethod()" [matAutocomplete]="auto">
+      <input matInput type="text" [(ngModel)]="TaskModel.AccountDomainName" (blur)="onBlurMethod()" [matAutocomplete]="auto">
       <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selectedPj($event.option.id)">
         <mat-option *ngFor="let option of ProjectList" [id]="option.id"  [value]="option.name">
           {{ option.name }}
@@ -11,7 +11,7 @@
   </div>
   <div fxFlex="15%">
     <mat-form-field class="full-width-field" appearance="outline">
-      <mat-select  [(ngModel)]="TaskModel.Activity">
+      <mat-select  [(ngModel)]="TaskModel.ActivityId">
         <mat-option *ngFor="let option of TaskList" [value]="option.id">
           {{ option.activityDescription }}
         </mat-option>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {UserRequest} from '../models/user-request';
 
 const AUTH_API = 'http://hieuvm.xyz:8080/api/Auth/';
 
@@ -20,5 +21,9 @@ export class AuthService {
       email: credentials.email,
       password: credentials.password
     }, httpOptions);
+  }
+
+  create(user: UserRequest, accDomainId: string): Observable<any> {
+    return this.http.post(AUTH_API + 'Register/' + accDomainId, user, httpOptions);
   }
 }

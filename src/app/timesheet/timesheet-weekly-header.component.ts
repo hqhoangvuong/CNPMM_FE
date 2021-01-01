@@ -13,7 +13,8 @@ export class TimesheetWeeklyHeaderComponent implements OnInit {
 
   ngOnInit(): void {
     for (let i = 0; i <= 6; i++) {
-      const date = new Date().setDate(this.weekStart.getDate() + i);
+      const weekDateFormatted: Date = new Date(this.weekStart);
+      const date = new Date().setDate(weekDateFormatted.getDate() + i);
       const str = this.datepipe.transform(date, 'MM/dd');
       this.weekDays.push(str);
     }

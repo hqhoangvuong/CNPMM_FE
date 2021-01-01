@@ -2,10 +2,11 @@ import {Component, Input, OnInit} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { TimesheetTask } from '../models/timesheet-task';
 import { TimeSheetHour } from '../models/timesheet-hour';
-import { AccountDomainService } from '../_services/account-domain.service';
 import {Timesheet} from '../models/timesheet';
 import {UserService} from '../_services/user.service';
 import {TimesheetService} from '../_services/timesheet.service';
+import * as moment from 'moment';
+import {TimesheetHourRequest} from '../models/timesheet-hour-request';
 
 @Component({
   selector: 'app-weekly-report',
@@ -13,63 +14,60 @@ import {TimesheetService} from '../_services/timesheet.service';
   styleUrls: ['./weekly-report.component.scss']
 })
 export class WeeklyReportComponent implements OnInit {
+  @Input() Timesheet: Timesheet;
+  isRender = false;
   panelOpenState = false;
-  startDayRaw: any;
-  endDayRaw: any;
-  @Input() startDay: any;
-  @Input() endDay: any;
-  ListTask: Array<TimesheetTask> = [];
   TimesheetHr: TimeSheetHour = new TimeSheetHour();
-  constructor(public datepipe: DatePipe,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private timesheetService: TimesheetService) { }
 
   ngOnInit(): void {
-    this.startDayRaw = this.startDay;
-    this.endDayRaw = this.endDay;
-    this.startDay = this.datepipe.transform(this.startDay, 'MMMM dd');
-    this.endDay = this.datepipe.transform(this.endDay, 'MMMM dd');
-    this.addTask();
+    console.log(this.Timesheet);
+    if (this.Timesheet) {
+
+      if (!this.Timesheet.Tasks) {
+        this.Timesheet.Tasks = new Array<TimesheetTask>();
+      }
+      this.addTask();
+      this.onTaskBlur();
+    } else {
+      this.Timesheet = new Timesheet();
+      this.userService.getCurrentUserDetails().subscribe(x => {
+        this.Timesheet.UserId = x.id;
+      });
+      this.addTask();
+    }
+    console.log(this.Timesheet.StartDate, this.Timesheet.EndDate);
+    this.isRender = true;
   }
 
   addTask(): void {
     const timesheetTask = new TimesheetTask();
-    if (this.ListTask.length > 0) {
-      timesheetTask.Id = this.ListTask.length + 1;
-    }
-    this.ListTask.push(timesheetTask);
-    console.log(this.ListTask);
-  }
-
-  saveTask(): void {
-    console.log(this.ListTask);
+    timesheetTask.Id = this.Timesheet.Tasks.length;
+    this.Timesheet.Tasks.push(timesheetTask);
   }
 
   onTaskBlur(): void {
     this.TimesheetHr = new TimeSheetHour();
-    for (const item of this.ListTask) {
+    for (const item of this.Timesheet.Tasks) {
       this.TimesheetHr.AddTime(item);
     }
   }
 
   handleTaskAction(action: any): void {
     if (action.includes('delete')) {
-      if (this.ListTask.length === 0) {
+      if (this.Timesheet.Tasks.length === 0) {
         return;
       }
-
-      this.ListTask.forEach((value, index) => {
-        if (value.Id === action[1]) { this.ListTask.splice(index, 1); }
+      this.Timesheet.Tasks.forEach((value, index) => {
+        if (value.Id === action[1]) { this.Timesheet.Tasks.splice(index, 1); }
       });
-
-      console.log(action[1], this.ListTask);
     }
 
     if (action.includes('copy')) {
-      const copiedTask = Object.assign({}, this.ListTask[action[1]]);
-      copiedTask.Id = Number(this.ListTask.length);
-      this.ListTask.push(copiedTask);
-      console.log(copiedTask);
+      const copiedTask = Object.assign({}, this.Timesheet.Tasks[action[1]]);
+      copiedTask.Id = Number(this.Timesheet.Tasks.length);
+      this.Timesheet.Tasks.push(copiedTask);
     }
     this.onTaskBlur();
   }
@@ -84,15 +82,31 @@ export class WeeklyReportComponent implements OnInit {
   }
 
   onSave(): void {
-    this.userService.getCurrentUserDetails().subscribe(x => {
-      const timesheet: Timesheet = new Timesheet();
-      timesheet.UserId = x[0].id;
-      timesheet.StartDate = this.startDayRaw;
-      timesheet.EndDate = this.endDayRaw;
-      timesheet.TotalHour = 30;
-      timesheet.Status = 30;
-      console.log(timesheet);
-      this.timesheetService.addTimeSheet(timesheet);
+    if (this.Timesheet.Id === null) {
+      this.timesheetService.addTimeSheet(this.Timesheet).subscribe(data => this.Timesheet = data);
+    }
+    this.timesheetService.addTasks(this.Timesheet.Id, this.Timesheet.Tasks).subscribe(savedTasks => {
+      console.log(savedTasks);
+      savedTasks.tasks.forEach((element, index) => {
+        this.Timesheet.Tasks[index].Id = element.id;
+        const workedHour: Array<number> = this.Timesheet.Tasks[index].exportHour();
+        const workedHourId: Array<number> = this.Timesheet.Tasks[index].exportHourId();
+        for (let i = 0; i < 7; i++) {
+          const hour: TimesheetHourRequest = new TimesheetHourRequest();
+          const utcDate: Date = new Date(moment(this.Timesheet.StartDate).add(i, 'days').toString());
+
+          hour.Id = workedHourId[i];
+          hour.TimesheetTaskId = this.Timesheet.Tasks[index].Id;
+          hour.WorkingDate = utcDate;
+          hour.WorkingHour = workedHour[i];
+          this.timesheetService.addHour(hour).subscribe(data =>  console.log(data));
+        }
+      });
     });
   }
+
+  onSubmit(): void {
+    this.Timesheet.Status = 10;
+    this.timesheetService.addTimeSheet(this.Timesheet).subscribe();
+}
 }

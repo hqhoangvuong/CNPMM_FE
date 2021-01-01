@@ -10,5 +10,12 @@
   padding-top: 10px;
   display: flex;
   flex-direction: row-reverse;
+}
 
+.not-submitted-label {
+  border: 1px solid orange;
+  padding: 2px;
+  background-color: orange;
+  opacity: 0.8;
+  border-radius: 25px;
 }

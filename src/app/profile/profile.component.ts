@@ -28,8 +28,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     if (!this.isCallFromAnother) {
       this.userService.getCurrentUserDetails().subscribe(userDetail => {
-        this.currentUser = userDetail[0];
-        userDetail[0].jobs.forEach((element) => {
+        this.currentUser = userDetail;
+        userDetail.jobs.forEach((element) => {
           if (element.isActive === true) {
             this.currentJobTitle = element.jobTitle;
           }

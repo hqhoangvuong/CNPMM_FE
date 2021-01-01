@@ -20,7 +20,7 @@ export class UserService {
   }
 
   getCurrentUserDetails(): Observable<any> {
-    return this.http.get(API_URL, { responseType: 'json' });
+    return this.http.get(API_URL + 'currentfull', { responseType: 'json' });
   }
 
   getModeratorBoard(): Observable<any> {

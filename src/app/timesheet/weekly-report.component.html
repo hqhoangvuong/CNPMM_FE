@@ -1,17 +1,26 @@
-<div class="container">
+<div class="container" *ngIf="isRender">
   <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          This week ({{startDay}} - {{endDay}})
+          <p>
+            This week ({{ Timesheet.StartDate | date: 'MMMM dd'}} -
+            {{ Timesheet.EndDate | date: 'MMMM dd'}})
+          </p>
+          &nbsp; &nbsp; &nbsp;
+          <p *ngIf="Timesheet.Status === 0" class="not-submitted-label"> Not-Submitted </p>
         </mat-panel-title>
         <mat-panel-description>
-          Total Hours: {{TimesheetHr.TotalHrs}}
+          <p> Total hours: {{ TimesheetHr.TotalHrs }} </p>
+          &nbsp; &nbsp; &nbsp;
+          <p *ngIf="TimesheetHr.TotalHrs < 40" style="color:#ff0000;">
+            Total hour is less than 40 hours
+          </p>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-timesheet-weekly-header [weekStart]="startDayRaw"></app-timesheet-weekly-header>
-      <app-timesheet-task *ngFor="let task of ListTask"
+      <app-timesheet-weekly-header [weekStart]="Timesheet.StartDate"></app-timesheet-weekly-header>
+      <app-timesheet-task *ngFor="let task of Timesheet.Tasks "
                           [TaskModel]="task"
                           (change)="onTaskBlur()"
                           (ButtonClicked)="handleTaskAction($event)">
@@ -22,8 +31,8 @@
 
       <div class="submit-control-button">
         <button mat-raised-button (click)="onSave()"> Save </button>
-        &nbsp;&nbsp;
-        <button mat-raised-button> Submit </button>
+        &nbsp;&nbsp;&nbsp;
+        <button mat-raised-button (click)="onSubmit()"> Submit </button>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

@@ -1,0 +1,23 @@
+<h1 mat-dialog-title>Create new user </h1>
+<div mat-dialog-content>
+  <mat-form-field class="full-width">
+    <mat-label>User name</mat-label>
+    <input matInput [(ngModel)]="data.Username">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput [(ngModel)]="data.Email">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Password</mat-label>
+    <input type="password" matInput [(ngModel)]="data.Password">
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <mat-label>Repeat password</mat-label>
+    <input type="password" matInput [(ngModel)]="repeatPassword">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" [mat-dialog-close]="data" cdkFocusInitial>Create</button>
+  <button mat-flat-button color="primary" (click)="onNoClick()">Cancel</button>
+</div>
