@@ -5,7 +5,7 @@
       <table mat-table [dataSource]="Projects" class="mat-elevation-z8">
         <ng-container matColumnDef="primary">
           <th mat-header-cell *matHeaderCellDef> Primary </th>
-          <td mat-cell *matCellDef="let element"> <mat-radio-button [checked]="element.isActive"></mat-radio-button> </td>
+          <td mat-cell *matCellDef="let element"> <mat-radio-button [checked]="element.isActive" [disabled]="true"></mat-radio-button> </td>
         </ng-container>
         <ng-container matColumnDef="project">
           <th mat-header-cell *matHeaderCellDef> Project </th>

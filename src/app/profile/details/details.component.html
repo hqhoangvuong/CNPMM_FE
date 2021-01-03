@@ -10,49 +10,49 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>First name</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.firstName">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.firstName" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Last name</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.lastName">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.lastName" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Middle name</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.middleName">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.middleName" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Full name</mat-label>
-            <input matInput type="text" [(ngModel)]="FullName">
+            <input matInput type="text" [(ngModel)]="FullName" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Nationality</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.nationality">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.nationality" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Date of Birth</mat-label>
-            <input matInput type="text" value="02/08/1999">
+            <input matInput type="text" value="02/08/1999" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Marital status</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.maritalStatus">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.maritalStatus" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Gender</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.sex">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.sex" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
       </div>
@@ -65,31 +65,31 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Vietnamese name</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.vietnameseName">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.vietnameseName" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Ethnic race</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.ethnicRace">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.ethnicRace" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Birthplace city</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.birthplaceCity">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.birthplaceCity" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>ID card No.</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.idCardNo">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.idCardNo" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Issued date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]="UserBasicInfo.issuedDate">
+            <input matInput [matDatepicker]="picker" [(ngModel)]="UserBasicInfo.issuedDate" [disabled]="!isEditingMode">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
@@ -97,12 +97,12 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Issued place</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.issuedPlace">
+            <input matInput type="text" [(ngModel)]="UserBasicInfo.issuedPlace" [disabled]="!isEditingMode">
           </mat-form-field>
         </div>
       </div>
       <div align="right">
-        <button mat-flat-button color="primary" (click)="onSaveButtonClicked()"> Save changes </button>
+        <button mat-flat-button color="primary" (click)="onSaveButtonClicked()" *ngIf="isEditingMode"> Save changes </button>
       </div>
     </mat-card-content>
   </div>

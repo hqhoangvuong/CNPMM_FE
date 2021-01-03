@@ -13,11 +13,13 @@
           </div>
           <div fxLayout.gt-sm="column" fxFlex.gt-sm="55%" class="gutter center">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Email" type="text" class="form-control" name="username" [(ngModel)]="form.email" required #email="ngModel" />
+              <input matInput placeholder="Email" type="text" class="form-control" name="username"
+                     [(ngModel)]="form.email" required #email="ngModel" />
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Password" type="password" class="form-control" name="password" [(ngModel)]="form.password"
+              <input matInput placeholder="Password" type="password" class="form-control" name="password"
+                     [(ngModel)]="form.password"
                      required minlength="6" #password="ngModel" />
             </mat-form-field>
             <button mat-stroked-button color="accent" class="btn btn-block">Log in</button>

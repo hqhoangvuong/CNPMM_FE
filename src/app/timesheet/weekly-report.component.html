@@ -33,7 +33,8 @@
       </app-timesheet-task>
       <app-timesheet-footer [TimesheetHr]="TimesheetHr"
                             (FooterButtonClicked)="handleTaskActionButtonClicked($event)"
-                            [IsForReview]="isForReview">
+                            [IsForReview]="isForReview"
+                            [isAllowForEdit]="isAllowToEdit">
       </app-timesheet-footer>
 
       <div class="submit-control-button">

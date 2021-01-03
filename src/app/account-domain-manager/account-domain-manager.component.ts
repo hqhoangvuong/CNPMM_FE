@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {fakeAsync} from '@angular/core/testing';
 
 @Component({
   selector: 'app-account-domain-manager',

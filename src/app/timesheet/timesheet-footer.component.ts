@@ -10,6 +10,7 @@ import {EventEmitter} from '@angular/core';
 export class TimesheetFooterComponent implements OnInit {
   @Input() TimesheetHr: TimeSheetHour;
   @Input() IsForReview: any;
+  @Input() isAllowForEdit: any;
   fxFlex2 = '32%';
   @Output() FooterButtonClicked = new EventEmitter();
   constructor() { }

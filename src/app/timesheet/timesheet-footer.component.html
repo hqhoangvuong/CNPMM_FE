@@ -1,6 +1,6 @@
 <div class="container-padding-top-10px-alight-center" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
   <div fxFlex="15%" >
-    <button mat-stroked-button (click)="buttonClicked('add-new-task')" *ngIf="!IsForReview">+ New task</button>
+    <button mat-stroked-button (click)="buttonClicked('add-new-task')" *ngIf="!IsForReview && isAllowForEdit">+ New task</button>
     <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!IsForReview">
       <mat-icon>more_vert</mat-icon>
     </button>
@@ -21,37 +21,37 @@
     <div fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="15px" ngClass.gt-xs="ml-10">
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="number" [ngModel]="TimesheetHr.MonHrs">
+          <input matInput maxlength="2" type="number" [ngModel]="TimesheetHr.MonHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="number" [ngModel]="TimesheetHr.TueHrs">
+          <input matInput maxlength="2" type="number" [ngModel]="TimesheetHr.TueHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.WedHrs">
+          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.WedHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.ThuHrs">
+          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.ThuHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.FriHrs">
+          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.FriHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.SatHrs">
+          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.SatHrs" [disabled]="true">
         </mat-form-field>
       </div>
       <div fxFlex="10%">
         <mat-form-field class="full-width-field" appearance="outline" floatLabel='never'>
-          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.SunHrs">
+          <input matInput maxlength="2" type="text" [ngModel]="TimesheetHr.SunHrs" [disabled]="true">
         </mat-form-field>
       </div>
     </div>

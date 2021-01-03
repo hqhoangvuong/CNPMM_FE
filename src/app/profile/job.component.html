@@ -10,55 +10,55 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Job title</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.jobTitle">
+            <input matInput type="text" [(ngModel)]="currentJob.jobTitle" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Employee code</mat-label>
-            <input matInput type="text" [(ngModel)]="EmployeeCode">
+            <input matInput type="text" [(ngModel)]="EmployeeCode" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Resource</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.resource">
+            <input matInput type="text" [(ngModel)]="currentJob.resource" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Department</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.department">
+            <input matInput type="text" [(ngModel)]="currentJob.department" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Working location</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.workLocation">
+            <input matInput type="text" [(ngModel)]="currentJob.workLocation" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Working office</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.workingOffice">
+            <input matInput type="text" [(ngModel)]="currentJob.workingOffice" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Seating plan</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.seatingPlan">
+            <input matInput type="text" [(ngModel)]="currentJob.seatingPlan" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Start date</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.startDate">
+            <input matInput type="text" [(ngModel)]="currentJob.startDate" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Termination date</mat-label>
-            <input matInput type="text" [(ngModel)]="currentJob.endDate">
+            <input matInput type="text" [(ngModel)]="currentJob.endDate" [disabled]="true">
           </mat-form-field>
         </div>
       </div>
@@ -88,9 +88,9 @@
         <ng-container matColumnDef="action" style.display="IsEdit">
           <th mat-header-cell *matHeaderCellDef> Action </th>
           <td mat-cell *matCellDef="let element">
-            <button mat-flat-button color="primary" (click)="onUpdateJob(element.id)"> Edit </button>
+            <button mat-flat-button color="primary" (click)="onUpdateJob(element.id)" *ngIf="IsEdit"> Edit </button>
             &nbsp;&nbsp;
-            <button mat-flat-button color="warn"> Delete </button>
+            <button mat-flat-button color="warn" *ngIf="IsEdit"> Delete </button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

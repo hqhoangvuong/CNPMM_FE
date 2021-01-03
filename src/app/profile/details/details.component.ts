@@ -16,6 +16,9 @@ export class DetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    if (this.isEditingMode === null) {
+      this.isEditingMode = false;
+    }
     this.FullName = this.UserBasicInfo.firstName + ' ' + this.UserBasicInfo.middleName + ' ' + this.UserBasicInfo.lastName;
   }
 
