@@ -36,11 +36,16 @@
       </mat-card>
     </div>
     <div class="details-content">
-      <app-details *ngIf="isDetailSelected" [UserBasicInfo]="currentUser" [isEditingMode]="isCallFromAnother"
+      <app-details *ngIf="isDetailSelected" [UserBasicInfo]="currentUser"
+                   [isEditingMode]="isCallFromAnother"
                    (saveChange)="saveDetailsInfo()">
       </app-details>
-      <app-job *ngIf="isJobSelected" [Jobs]="currentUser.jobs" [EmployeeCode]="currentUser.employeeCode"></app-job>
-      <app-project-info *ngIf="isPjInfoSelected" [Projects]="currentUser.projects"></app-project-info>
+      <app-job *ngIf="isJobSelected" [Jobs]="currentUser.jobs"
+               [EmployeeCode]="currentUser.employeeCode"
+               [IsEdit]="isCallFromAnother"></app-job>
+      <app-project-info *ngIf="isPjInfoSelected"
+                        [Projects]="currentUser.projects"
+      ></app-project-info>
     </div>
   </div>
 </div>

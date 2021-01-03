@@ -44,7 +44,6 @@ export class TimesheetManagementComponent implements OnInit {
               count += 1;
               if (count === this.accountDomainUserList.length) {
                 this.isRender = true;
-                console.log(this.userOverView);
               }
           });
         });

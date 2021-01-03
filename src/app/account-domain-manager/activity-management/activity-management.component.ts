@@ -25,7 +25,6 @@ export class ActivityManagementComponent implements OnInit {
       this.currentUserAccDomain = accDomain;
       this.activityService.getActivityByAccDomainId(this.currentUserAccDomain.id).subscribe( x => {
         this.accountDomainActivity = x;
-        console.log(x);
       });
     });
   }
@@ -52,11 +51,15 @@ export class ActivityManagementComponent implements OnInit {
     this.openDialog(activityEdit, 'edit');
   }
 
-  onCreate() {
-
+  onCreate(): void {
+    const ac = new Activity();
+    ac.accountDomainId = this.currentUserAccDomain.id;
+    this.openDialog(ac, 'create');
   }
 
-  onDelete(activityId: string) {
-
+  onDelete(activityId: string): void {
+    const activityDelete = this.accountDomainActivity.find(x => x.id === activityId);
+    console.log(activityDelete);
+    this.activityService.deleteActivity(activityDelete).subscribe(x => this.ngOnInit());
   }
 }

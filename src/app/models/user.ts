@@ -11,6 +11,7 @@ export class User {
   name: string;
   gender: string;
   sex: string;
+  doB: Date;
   employeeCode: string;
   phoneNumber: string;
   vietnameseName: string;

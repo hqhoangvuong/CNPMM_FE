@@ -47,7 +47,6 @@ export class HrManagementComponent implements OnInit {
   updateUser(userId: string): void {
     this.userService.getUserById(userId).subscribe(x => {
       this.selectedUser = x;
-      console.log(x);
       this.isDisplayDetail = true;
     });
   }

@@ -12,9 +12,11 @@
       </button>
     </mat-drawer>
     <mat-drawer-content>
-      <app-hr-management *ngIf="isHrManSelected"></app-hr-management>
-      <app-timesheet-management *ngIf="isTimesheetManSelected"></app-timesheet-management>
-      <app-activity-management *ngIf="isActivityManSelected"></app-activity-management>
+      <div class="padding-10px">
+        <app-hr-management *ngIf="isHrManSelected"></app-hr-management>
+        <app-timesheet-management *ngIf="isTimesheetManSelected"></app-timesheet-management>
+        <app-activity-management *ngIf="isActivityManSelected"></app-activity-management>
+      </div>
     </mat-drawer-content>
   </mat-drawer-container>
 </div>

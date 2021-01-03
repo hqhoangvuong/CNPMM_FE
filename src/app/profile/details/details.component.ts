@@ -29,5 +29,6 @@ export class DetailsComponent implements OnInit {
   onSaveButtonClicked(): void {
     this.onSaveChange();
     this.saveChange.emit('details saved');
+    this.ngOnInit();
   }
 }

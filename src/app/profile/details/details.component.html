@@ -28,7 +28,7 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Full name</mat-label>
-            <input matInput type="text" [(ngModel)]="FullName" [disabled]="!isEditingMode">
+            <input matInput type="text" [(ngModel)]="FullName" [disabled]="true">
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
@@ -40,7 +40,9 @@
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
             <mat-label>Date of Birth</mat-label>
-            <input matInput type="text" value="02/08/1999" [disabled]="!isEditingMode">
+            <input matInput [matDatepicker]="pickerDoB" [(ngModel)]="UserBasicInfo.doB" [disabled]="!isEditingMode">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #pickerDoB></mat-datepicker>
           </mat-form-field>
         </div>
         <div form-group fxFlex="50%">
@@ -51,8 +53,10 @@
         </div>
         <div form-group fxFlex="50%">
           <mat-form-field class="full-width-field">
-            <mat-label>Gender</mat-label>
-            <input matInput type="text" [(ngModel)]="UserBasicInfo.sex" [disabled]="!isEditingMode">
+            <mat-select required [(ngModel)]="UserBasicInfo.gender">
+              <mat-option [value]="true">Male</mat-option>
+              <mat-option [value]="false">Female</mat-option>
+            </mat-select>
           </mat-form-field>
         </div>
       </div>

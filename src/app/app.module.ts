@@ -12,11 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { DirectoryComponent } from './directory/directory.component';
-import { DirectoryDetailsComponent } from './directory/directory-details/directory-details.component';
 import { DetailsComponent } from './profile/details/details.component';
 import { JobComponent } from './profile/job.component';
 import { ProjectInfoComponent } from './profile/project-info.component';
@@ -42,8 +39,6 @@ import { AddOrEditActivityComponent } from './account-domain-manager/activity-ma
     LoginComponent,
     HomeComponent,
     ProfileComponent,
-    DirectoryComponent,
-    DirectoryDetailsComponent,
     DetailsComponent,
     JobComponent,
     ProjectInfoComponent,
