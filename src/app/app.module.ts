@@ -32,6 +32,8 @@ import { TimesheetManagementComponent } from './account-domain-manager/timesheet
 import { ActivityManagementComponent } from './account-domain-manager/activity-management/activity-management.component';
 import { AddNewPersonDialogComponent } from './account-domain-manager/hr-management/add-new-person-dialog.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import { UserDetailsModalComponent } from './profile/details/user-details-modal.component';
+import { AddOrEditActivityComponent } from './account-domain-manager/activity-management/add-or-edit-activity.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     HrManagementComponent,
     TimesheetManagementComponent,
     ActivityManagementComponent,
-    AddNewPersonDialogComponent
+    AddNewPersonDialogComponent,
+    UserDetailsModalComponent,
+    AddOrEditActivityComponent
   ],
   imports: [
     BrowserModule,

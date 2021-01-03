@@ -78,4 +78,10 @@ export class ProfileComponent implements OnInit {
     this.isJobSelected = false;
     this.isPjInfoSelected = true;
   }
+
+  saveDetailsInfo(): void {
+    this.userService.updateUserInfo(this.currentUser).subscribe(
+      result => this.currentUser = result
+    );
+  }
 }

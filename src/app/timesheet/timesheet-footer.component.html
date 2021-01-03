@@ -1,7 +1,7 @@
 <div class="container-padding-top-10px-alight-center" fxLayout.xs="row" fxLayout="row wrap" fxLayoutGap="17.5px" ngClass.gt-xs="ml-10">
-  <div fxFlex="15%">
-    <button mat-stroked-button (click)="buttonClicked('add-new-task')">+ New task</button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+  <div fxFlex="15%" >
+    <button mat-stroked-button (click)="buttonClicked('add-new-task')" *ngIf="!IsForReview">+ New task</button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!IsForReview">
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
@@ -14,7 +14,7 @@
   <div fxFlex="15%">
 
   </div>
-  <div fxFlex="32%">
+  <div [fxFlex]="fxFlex2">
 
   </div>
   <div fxFlex="35%">

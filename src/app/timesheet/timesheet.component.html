@@ -1,5 +1,6 @@
 <div class="container">
   <app-weekly-report *ngFor="let timesheet of Timesheet"
-                     [Timesheet]="timesheet" >
+                     [Timesheet]="timesheet"
+                     [isForReview]="IsForReview">
   </app-weekly-report>
 </div>

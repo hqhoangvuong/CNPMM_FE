@@ -27,11 +27,12 @@ export class HomeComponent implements OnInit {
       this.currentUser = userDetail;
       this.getWeek();
       this.timesheetService.getTimesheetByDate(this.currentUser.id,
-         moment(this.weekStart).toDate(),
-         moment(this.weekEnd).toDate()).subscribe(existTimesheet => {
+        moment(this.weekStart).utc().toDate(),
+        moment(this.weekEnd).utc().toDate()).subscribe(existTimesheet => {
         if (!existTimesheet) {
           this.ExistedTimesheet.StartDate = this.weekStart;
           this.ExistedTimesheet.EndDate = this.weekEnd;
+          this.isRender = true;
         } else {
           this.ExistedTimesheet.Id = existTimesheet.id;
           this.ExistedTimesheet.UserId = existTimesheet.userId;
@@ -95,7 +96,6 @@ export class HomeComponent implements OnInit {
               this.ExistedTimesheet.Tasks.push(task);
             });
           }
-          console.log(this.ExistedTimesheet);
           this.isRender = true;
         }
       });

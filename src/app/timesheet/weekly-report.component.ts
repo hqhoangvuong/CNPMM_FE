@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { TimesheetTask } from '../models/timesheet-task';
 import { TimeSheetHour } from '../models/timesheet-hour';
 import {Timesheet} from '../models/timesheet';
@@ -16,15 +15,15 @@ import {TimesheetHourRequest} from '../models/timesheet-hour-request';
 export class WeeklyReportComponent implements OnInit {
   @Input() Timesheet: Timesheet;
   isRender = false;
+  isAllowToEdit: any;
+  @Input() isForReview: any;
   panelOpenState = false;
   TimesheetHr: TimeSheetHour = new TimeSheetHour();
   constructor(private userService: UserService,
               private timesheetService: TimesheetService) { }
 
   ngOnInit(): void {
-    console.log(this.Timesheet);
     if (this.Timesheet) {
-
       if (!this.Timesheet.Tasks) {
         this.Timesheet.Tasks = new Array<TimesheetTask>();
       }
@@ -37,7 +36,10 @@ export class WeeklyReportComponent implements OnInit {
       });
       this.addTask();
     }
-    console.log(this.Timesheet.StartDate, this.Timesheet.EndDate);
+
+    this.isAllowToEdit = !(this.Timesheet.Status === 10 || this.Timesheet.Status === 20 || this.isForReview === true);
+    console.log(this.Timesheet.Status);
+    console.log(this.Timesheet.Status === 10, this.Timesheet.Status === 20, this.isForReview === true);
     this.isRender = true;
   }
 
@@ -82,31 +84,66 @@ export class WeeklyReportComponent implements OnInit {
   }
 
   onSave(): void {
-    if (this.Timesheet.Id === null) {
-      this.timesheetService.addTimeSheet(this.Timesheet).subscribe(data => this.Timesheet = data);
-    }
-    this.timesheetService.addTasks(this.Timesheet.Id, this.Timesheet.Tasks).subscribe(savedTasks => {
-      console.log(savedTasks);
-      savedTasks.tasks.forEach((element, index) => {
-        this.Timesheet.Tasks[index].Id = element.id;
-        const workedHour: Array<number> = this.Timesheet.Tasks[index].exportHour();
-        const workedHourId: Array<number> = this.Timesheet.Tasks[index].exportHourId();
-        for (let i = 0; i < 7; i++) {
-          const hour: TimesheetHourRequest = new TimesheetHourRequest();
-          const utcDate: Date = new Date(moment(this.Timesheet.StartDate).add(i, 'days').toString());
+    console.log(this.Timesheet);
+    if (this.Timesheet.Id === '-1') {
+      this.timesheetService.addTimeSheet(this.Timesheet).subscribe(data => {
+        this.Timesheet.Id = data.id;
+        this.Timesheet.UserId = data.userId;
+        this.timesheetService.addTasks(this.Timesheet.Id, this.Timesheet.Tasks).subscribe(savedTasks => {
+          console.log(savedTasks);
+          savedTasks.tasks.forEach((element, index) => {
+            this.Timesheet.Tasks[index].Id = element.id;
+            const workedHour: Array<number> = this.Timesheet.Tasks[index].exportHour();
+            const workedHourId: Array<number> = this.Timesheet.Tasks[index].exportHourId();
+            for (let i = 0; i < 7; i++) {
+              const hour: TimesheetHourRequest = new TimesheetHourRequest();
+              const utcDate: Date = new Date(moment(this.Timesheet.StartDate).add(i, 'days').toString());
 
-          hour.Id = workedHourId[i];
-          hour.TimesheetTaskId = this.Timesheet.Tasks[index].Id;
-          hour.WorkingDate = utcDate;
-          hour.WorkingHour = workedHour[i];
-          this.timesheetService.addHour(hour).subscribe(data =>  console.log(data));
-        }
+              hour.Id = workedHourId[i];
+              hour.TimesheetTaskId = this.Timesheet.Tasks[index].Id;
+              hour.WorkingDate = utcDate;
+              hour.WorkingHour = workedHour[i];
+              this.timesheetService.addHour(hour).subscribe(data =>  console.log(data));
+            }
+          });
+        });
       });
-    });
+    } else
+    {
+      this.timesheetService.addTasks(this.Timesheet.Id, this.Timesheet.Tasks).subscribe(savedTasks => {
+        console.log(savedTasks);
+        savedTasks.tasks.forEach((element, index) => {
+          this.Timesheet.Tasks[index].Id = element.id;
+          const workedHour: Array<number> = this.Timesheet.Tasks[index].exportHour();
+          const workedHourId: Array<number> = this.Timesheet.Tasks[index].exportHourId();
+          for (let i = 0; i < 7; i++) {
+            const hour: TimesheetHourRequest = new TimesheetHourRequest();
+            const utcDate: Date = new Date(moment(this.Timesheet.StartDate).add(i, 'days').toString());
+
+            hour.Id = workedHourId[i];
+            hour.TimesheetTaskId = this.Timesheet.Tasks[index].Id;
+            hour.WorkingDate = utcDate;
+            hour.WorkingHour = workedHour[i];
+            this.timesheetService.addHour(hour).subscribe(data =>  console.log(data));
+          }
+        });
+      });
+    }
+
   }
 
   onSubmit(): void {
     this.Timesheet.Status = 10;
     this.timesheetService.addTimeSheet(this.Timesheet).subscribe();
-}
+  }
+
+  onApprove(): void {
+    this.Timesheet.Status = 20;
+    this.timesheetService.addTimeSheet(this.Timesheet).subscribe();
+  }
+
+  onReject(): void {
+    this.Timesheet.Status = 30;
+    this.timesheetService.addTimeSheet(this.Timesheet).subscribe();
+  }
 }

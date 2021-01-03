@@ -10,6 +10,9 @@
           </p>
           &nbsp; &nbsp; &nbsp;
           <p *ngIf="Timesheet.Status === 0" class="not-submitted-label"> Not-Submitted </p>
+          <p *ngIf="Timesheet.Status === 10" class="not-submitted-label"> Pedding for review </p>
+          <p *ngIf="Timesheet.Status === 20" class="not-submitted-label"> Approved </p>
+          <p *ngIf="Timesheet.Status === 30" class="not-submitted-label"> Rejected </p>
         </mat-panel-title>
         <mat-panel-description>
           <p> Total hours: {{ TimesheetHr.TotalHrs }} </p>
@@ -19,20 +22,28 @@
           </p>
         </mat-panel-description>
       </mat-expansion-panel-header>
-      <app-timesheet-weekly-header [weekStart]="Timesheet.StartDate"></app-timesheet-weekly-header>
-      <app-timesheet-task *ngFor="let task of Timesheet.Tasks "
+      <app-timesheet-weekly-header [weekStart]="Timesheet.StartDate"
+                                   [isForReview]="isForReview"></app-timesheet-weekly-header>
+      <app-timesheet-task *ngFor="let task of Timesheet.Tasks"
                           [TaskModel]="task"
                           (change)="onTaskBlur()"
-                          (ButtonClicked)="handleTaskAction($event)">
+                          (ButtonClicked)="handleTaskAction($event)"
+                          [isForReview]="isForReview"
+                          [isAllowForEdit]="isAllowToEdit">
       </app-timesheet-task>
       <app-timesheet-footer [TimesheetHr]="TimesheetHr"
-                            (FooterButtonClicked)="handleTaskActionButtonClicked($event)">
+                            (FooterButtonClicked)="handleTaskActionButtonClicked($event)"
+                            [IsForReview]="isForReview">
       </app-timesheet-footer>
 
       <div class="submit-control-button">
-        <button mat-raised-button (click)="onSave()"> Save </button>
+        <button mat-raised-button (click)="onSave()" *ngIf="!isForReview && isAllowToEdit"> Save </button>
         &nbsp;&nbsp;&nbsp;
-        <button mat-raised-button (click)="onSubmit()"> Submit </button>
+        <button mat-raised-button (click)="onSubmit()" *ngIf="!isForReview && isAllowToEdit"> Submit </button>
+        &nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="primary" (click)="onApprove()" *ngIf="isForReview"> Approve </button>
+        &nbsp;&nbsp;&nbsp;
+        <button mat-raised-button color="warn" (click)="onReject()" *ngIf="isForReview"> Reject </button>
       </div>
     </mat-expansion-panel>
   </mat-accordion>

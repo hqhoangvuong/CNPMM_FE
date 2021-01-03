@@ -11,16 +11,28 @@ export class TimesheetTaskComponent implements OnInit {
 
   constructor(private accountService: AccountDomainService) { }
   @Input() TaskModel: TimesheetTask;
+  @Input() isForReview: any;
+  @Input() isAllowForEdit: any;
   @Output() TaskModelChange = new EventEmitter<TimesheetTask>();
   @Output() ButtonClicked = new EventEmitter<[string, number]>();
+  fxFlex1 = '15%';
+  fxFlex2 = '32%';
   ProjectList: any;
   TaskList: any;
   ngOnInit(): void {
+    if (this.isForReview) {
+      this.fxFlex1 = '15%';
+      this.fxFlex2 = '20%';
+    }
     this.accountService.getAllProject().subscribe(x => {
       this.ProjectList = x;
       if (this.TaskModel.Activity && this.TaskModel.AccountDomainName){
         const currentSelectedPj = this.ProjectList.find(element => element.name === this.TaskModel.AccountDomainName);
         this.selectedPj(currentSelectedPj.id);
+      }
+
+      if (this.isForReview === null) {
+        this.isForReview = false;
       }
     });
 

@@ -4,7 +4,7 @@
 </div>
 <p></p>
 <div *ngIf="isRender">
-  <app-weekly-report [Timesheet]="ExistedTimesheet"></app-weekly-report>
+  <app-weekly-report [Timesheet]="ExistedTimesheet" [isForReview]="false"></app-weekly-report>
 </div>
 <ng-template #loggedOut>
   Please login.

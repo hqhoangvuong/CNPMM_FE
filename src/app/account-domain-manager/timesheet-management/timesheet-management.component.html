@@ -1,1 +1,47 @@
-<p>timesheet-management works!</p>
+<div *ngIf="isRender">
+  <h2 class="padding-30px"> Timesheet overview for Account Domain {{ currentUserAccDomain.name }} of {{ now.format('MM/YYYY') }} </h2>
+  <table mat-table [dataSource]="userOverView" class="mat-elevation-z8">
+    <ng-container matColumnDef="userid">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="numberofloggedtask">
+      <th mat-header-cell *matHeaderCellDef> Number of logged tasks </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalTaskLogged}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="numberofsubmittedtimesheet">
+      <th mat-header-cell *matHeaderCellDef> Number of Submitted Timesheet </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalSubmittedTimesheet}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="totalhourlogged">
+      <th mat-header-cell *matHeaderCellDef> Total logged hours </th>
+      <td mat-cell *matCellDef="let element"> {{element.totalHourLogged}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="primary" (click)="onReview(element.userId)"
+                [disabled]="element.IsNothing">
+          Review </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="tableField"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableField;"></tr>
+  </table>
+</div>
+
+<div *ngIf="isRenderTimesheetDetails">
+  <app-timesheet [userId]="selectedUserId" [IsForReview]="true"></app-timesheet>
+</div>

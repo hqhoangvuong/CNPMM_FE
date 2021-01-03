@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-timesheet-weekly-header',
@@ -8,16 +9,22 @@ import {DatePipe} from '@angular/common';
 })
 export class TimesheetWeeklyHeaderComponent implements OnInit {
   weekDays: Array<string> = [];
+  fxFlex1 = '15%';
+  fxFlex2 = '32%';
   @Input() weekStart: any;
+  @Input() isForReview: any;
   constructor(public datepipe: DatePipe) { }
 
   ngOnInit(): void {
+    if (this.isForReview) {
+      this.fxFlex1 = '15%';
+      this.fxFlex2 = '20%';
+    }
+
     for (let i = 0; i <= 6; i++) {
       const weekDateFormatted: Date = new Date(this.weekStart);
-      const date = new Date().setDate(weekDateFormatted.getDate() + i);
-      const str = this.datepipe.transform(date, 'MM/dd');
-      this.weekDays.push(str);
+      const str = moment(weekDateFormatted).add(i, 'days');
+      this.weekDays.push(str.format('MM-DD'));
     }
   }
-
 }

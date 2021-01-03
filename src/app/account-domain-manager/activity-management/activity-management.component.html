@@ -1,1 +1,34 @@
-<p>activity-management works!</p>
+<div id="div-table">
+  <table mat-table [dataSource]="accountDomainActivity" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="accdomainid">
+      <th mat-header-cell *matHeaderCellDef> Account Domain </th>
+      <td mat-cell *matCellDef="let element"> {{currentUserAccDomain.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let element"> {{element.activityDescription}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-flat-button color="primary" (click)="onEdit(element.id)"> Edit </button>
+        &nbsp;&nbsp;
+        <button mat-flat-button color="warn" (click)="onDelete(element.id)"> Delete </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="TableField"></tr>
+    <tr mat-row *matRowDef="let row; columns: TableField;"></tr>
+  </table>
+  <div id="add-btn-div" align="right" class="padding-30px">
+    <button mat-flat-button color="primary" (click)="onCreate()"> + Add new Activity </button>
+  </div>
+</div>

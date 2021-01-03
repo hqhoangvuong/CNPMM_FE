@@ -5,6 +5,7 @@ import {Observable, Subscription} from 'rxjs';
 import {DatePipe} from '@angular/common';
 import {TimesheetTask} from '../models/timesheet-task';
 import {TimesheetHourRequest} from '../models/timesheet-hour-request';
+import {TimesheetOverview} from '../models/timesheet-overview';
 
 const API_URL = 'http://hieuvm.xyz:8080/api/Timesheet/';
 
@@ -21,8 +22,8 @@ export class TimesheetService {
     return this.http.post<Timesheet>(API_URL + 'add', timesheet);
   }
 
-  getTimesheetByMonth(month: number): Observable<any> {
-    return this.http.get(API_URL + 'bymonth?month=' + month, { responseType: 'json' });
+  getTimesheetByMonth(month: string, userId: string): Observable<any> {
+    return this.http.get(API_URL + 'bymonth?month=' + month + '&userId=' + userId, { responseType: 'json' });
   }
 
   getTimesheetByDate(userId: string, dateFrom: Date, dateTo: Date): Observable<any> {
@@ -37,5 +38,9 @@ export class TimesheetService {
 
   addHour(hour: TimesheetHourRequest): Observable<TimesheetHourRequest> {
     return this.http.post<TimesheetHourRequest> (API_URL + 'addhour', hour);
+  }
+
+  getOverView(userId: string, month: string): Observable<TimesheetOverview> {
+    return this.http.get<TimesheetOverview> (API_URL + 'getoverview?usrId=' + userId + '&month=' + month);
   }
 }
